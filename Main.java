@@ -34,16 +34,8 @@ class Player{
 //        scanner.close();
         return  choice;
     }
-    private String getName(){
-        Scanner scanner = new Scanner(System.in);
-        String name = scanner.nextLine();
-//        scanner.close();
-        return  name;
-    }
 
     void play(){
-        System.out.print("Enter your name: ");
-        this.name = this.getName();
         int userChoice;
         int trials = 0;
         do{
@@ -60,11 +52,12 @@ class Player{
                 }
                 trials++;
             } while (!(userChoice == this.randomNumber) && trials < 3);
+            System.out.println("Too many attempts!!");
 
             if (this.currentLevel == 1) {
                 this.score += 10;
                 this.range = 10;
-                System.out.println(this.score);
+                System.out.println("Your score: " + this.score);
             }
             if (this.currentLevel == 2) {
                 this.score += 15;
@@ -74,7 +67,7 @@ class Player{
             if (this.currentLevel == 3) {
                 this.score += 20;
                 this.range = 100;
-                System.out.println(this.score);
+                System.out.println("Your score: " + this.score);
             }
             System.out.println("Correct!!");
             System.out.println("Moving to level " + ++this.currentLevel);
@@ -104,11 +97,20 @@ public class Main {
 
     }
 
+    public static String getName(){
+        System.out.print("Enter your name: ");
+        Scanner scanner = new Scanner(System.in);
+        String name = scanner.nextLine();
+//        scanner.close();
+        return  name;
+    }
+
     public static void main(String[] args) {
 
         welcome();
+        String name = getName();
         int[] highestScore;
-       Player player1 = new Player("Royal Tk", "PGG-1234");
+       Player player1 = new Player(name, "PGG-1234");
        player1.play();
     }
 }
